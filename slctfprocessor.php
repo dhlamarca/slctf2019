@@ -16,17 +16,21 @@ Final key for each challenge should be formatted as "slctf[blank]" and I will br
 
 $cmd = htmlspecialchars($_REQUEST['cmd1']);
 $cmd = strtolower("$cmd");
+$filename = "cmd.log";
+$userid = htmlspecialchars($_COOKIE["slctf"]);
+$filecontent = "$userid :: $cmd\n";
+file_put_contents($filename, $filecontent, FILE_APPEND);
 
 switch ($cmd) {
     
     case "hi":
-        echo "-system:$cmd";
+        echo "$cmd";
         echo "</br></br>";
-        echo "oh hi";
+        echo "Oh Hi Mark!";
         break;
     
     case "help":
-        echo "-system:$cmd";
+        echo "$cmd";
         echo "</br></br>";
         echo "Welcome to the SiteLock Research 2019 CTF (Capture The Flag) challenge to celebrate our Open House.<br><br>
         
@@ -47,14 +51,16 @@ switch ($cmd) {
     case "ls":
     case "tree":
     case "ll":
-        echo "-system:$cmd";
+    case "file":
+    case "files":
+        echo "$cmd";
         echo "</br></br>";
         echo"└─.root</br>&ensp;&ensp;&ensp;└─folder</br>&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;└─secretFile";
         echo "</br></br>";
         break;
 
     case "research":
-        echo "-system:$cmd";
+        echo "$cmd";
         echo "</br></br>";
         echo "Your humble host for this capture the flag event.<br>If asked nicely they may offer a hint or guidance for helpful decoding tools. The magic word is \"Honey Pot\"";
         echo "</br></br>";
@@ -63,30 +69,62 @@ switch ($cmd) {
     case "whoami":
     case "who":
     case "who am i":
-        echo "-system:$cmd";
-        echo "</br></br>";
-        echo "research";
-        echo "</br></br>";
+        echo "$cmd";
+        if($_COOKIE["user"] === "root"){
+            echo "</br></br>";
+            echo "root";
+            echo "</br></br>";
+        }
+        else {
+            echo "</br></br>";
+            echo "research";
+            echo "</br></br>";
+        }
         break;
     
     case "pwd":
     case "directory":
-        echo "-system:$cmd";
+        echo "$cmd";
         echo "</br></br>";
-        echo "/root";
+        echo "/home/research";
         echo "</br></br>";
         break;
     
     case "binarykey":
     case "binary":
     case "binary key":
-        echo "~$$cmd";
+        echo "$cmd";
         echo "</br></br>";
         echo "slctf[xxxxxxxxx]</br>";
         echo "{next clue}";
         echo "</br></br>";
         break;
     
+    case "sudo":
+    case "sudo su -":
+    case "sudo su":
+    case "sudo su-":
+        $cookie_name = "user";
+        $cookie_value = "root";
+        setcookie($cookie_name, $cookie_value, time() + (86400 * 7), "/");
+        echo "$cmd";
+        echo "</br></br>";
+        echo "User changed";
+        echo "</br></br>";
+        break;
+    
+    case "cookie":
+        echo "</br></br>";
+        echo "$userid";
+        echo "</br></br>";
+        break;
+    
+    case "eyebinary":
+        echo "</br></br>";
+        echo "01100101 01111001 01100101 01110011 00100000 01100110 01110101 01101100 01101100 00100000 01101111 01100110 00100000 01101011 01100101 01111001 01110011 00100000 01111110 00100100 01100010 01101001 01101110 01100001 01110010 01111001 01101011 01100101 01111001";
+        echo "</br></br>";
+        break;
+        
     default:
         //if (!$cmd)
         echo "Command \"$cmd\" not recognized, please try again.";
