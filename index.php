@@ -58,15 +58,15 @@ crossorigin="anonymous">
      .',',,;::::l:',;co;;;;;;<span class="lock lock-glow">@@@@@          @@@@@@</span>;;;;;o; .okooololo';:..
        ...,::::::. ..':;<span class="lock lock-glow">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>;;... :olool,..'...
          ..ccc:c:    .,;<span class="lock lock-glow">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>;'.   :cldoo'....
-           ;:c:::      ;<span class="lock lock-glow">@@@@@@@@@@@@@@@@@@@@@@<span class="eye glow">######</span>@@@</span>;     cllooo...
-         ..;::::;      ;<span class="lock lock-glow">@@@@@                <span class="eye glow">######</span>@@@@</span>;     colooo,.. 
-         ..:::;,'      ;<span class="lock lock-glow">@@@@@               <span class="eye glow">######</span>@@@@@</span>;    .ldoddo,,'.
-         :lc:;,,,.,.   ;<span class="lock lock-glow">@@@@@             <span class="eye glow">######</span>  @@@@@</span>;  ':dooddoc:..
-         ;:;;;;;::c.   ;<span class="lock lock-glow">@@@@@    <span class="eye glow">###     #####</span>    @@@@@</span>; .:ldooddoll.
-         ..;:;,::cc'.  ;<span class="lock lock-glow">@@@@@  <span class="eye glow">####### ######</span>     @@@@@</span>;.'ooollooo::.
-           ;:::cccllc. ;<span class="lock lock-glow">@@@@@    <span class="eye glow">##########</span>       @@@@@</span>;ccloollooo'...
-           'ldclllool,,;<span class="lock lock-glow">@@@@@       <span class="eye glow">######</span>        @@@@@</span>;;lolooooooc...
-           .cd:looooooo;<span class="lock lock-glow">@@@@@         <span class="eye glow">##</span>          @@@@@</span>;llllooolol:.
+           ;:c:::      ;<span class="lock lock-glow">@@@@@@@@@@@@@@@@@@@@@@<span class="check glow">######</span>@@@</span>;     cllooo...
+         ..;::::;      ;<span class="lock lock-glow">@@@@@                <span class="check glow">######</span>@@@@</span>;     colooo,.. 
+         ..:::;,'      ;<span class="lock lock-glow">@@@@@               <span class="check glow">######</span>@@@@@</span>;    .ldoddo,,'.
+         :lc:;,,,.,.   ;<span class="lock lock-glow">@@@@@             <span class="check glow">######</span>  @@@@@</span>;  ':dooddoc:..
+         ;:;;;;;::c.   ;<span class="lock lock-glow">@@@@@    <span class="check glow">###     #####</span>    @@@@@</span>; .:ldooddoll.
+         ..;:;,::cc'.  ;<span class="lock lock-glow">@@@@@  <span class="check glow">####### ######</span>     @@@@@</span>;.'ooollooo::.
+           ;:::cccllc. ;<span class="lock lock-glow">@@@@@    <span class="check glow">##########</span>       @@@@@</span>;ccloollooo'...
+           'ldclllool,,;<span class="lock lock-glow">@@@@@       <span class="check glow">######</span>        @@@@@</span>;;lolooooooc...
+           .cd:looooooo;<span class="lock lock-glow">@@@@@         <span class="check glow">##</span>          @@@@@</span>;llllooolol:.
              'cxolooooo:<span class="lock lock-glow">@@@@@                     @@@@@</span>;llllooc:o,..
              .'ollolllo;<span class="lock lock-glow">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>;;:cclll,'.
                ;:lolllo:<span class="lock lock-glow">@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@</span>;;::ll':,.
@@ -82,49 +82,87 @@ crossorigin="anonymous">
                           ..,cloloooododdldc:loloool'.
                             ';cooddoododdldlclolocc:.
                             ..:oldoooolodldoolccc,..
-                              ';,:::;:;::;:;::;;,.
-</span> 
-</pre>
-<br/>
-<div id="loading-message" class="lg">
-<?php
-    $cookie_name = "slctf";
-    $cookie_value = "sitelock";
-    setcookie($cookie_name, $cookie_value, time() + (86400 * 30), "/");
-    
-    if(!isset($_COOKIE[$cookie_name])) {
-        echo "Welcome. Please type a command. Try using \$help";
-        
-    } else {
-        echo "Welcome Back. Please Type a command. Try using \$help";
-    }
-?>
-</div>
-<div class="w">
-    <form id="bash">
-    ~$<input id="cmd" class="w" type="text" autocomplete="off" size="75" maxlength="75"/>
-    <input id="submit" type="submit" style="display: none;"/></form>
-</div>
-</br></br>
+                              ';,:::;:;::;:;::;;
+        </span> 
+    </pre>
+    <br/>
+    <div id="loading-message" class="lg">
+        <?php
+            $cookie_name = "slctf";
+            $cookie_value = "sitelock";
+            $idseed = md5(microtime());
+            $cookie_value .= "-$idseed";
+            
+            if(!isset($_COOKIE[$cookie_name])) {
+                echo "Welcome. Please type a command. Try using \$help";
+                setcookie($cookie_name, $cookie_value, time() + (86400 * 7), "/");
+            } else {
+                echo "Welcome Back. Please Type a command. Try using \$help";
+                
+            }
+        ?>
+    </div>
+    <div class="w">
+        <form id="bash">
+        ~$<input id="cmd" class="w" type="text" autocomplete="off" size="50" maxlength="50"/>
+        <input id="submit" type="submit" style="display: none;"/></form>
+        <div id="display"></div>
+        <div id="lastout">
+        <?php
+            /*
+            $lastOut = array("");
+            
+            foreach($lastOut as $history) {
+                echo $history;
+                echo "<br>";
+            }
+            
+            array_push($lastOut, $lastCmd);
+            array_push($lastOut, $out);
+            */
+        ?>
+        </div>
+    </div>
+    </br></br>
 </div>
 <script>
 $(document).ready(function() {
     $("#bash").submit(function(event){
         event.preventDefault();
             var cmd = $("#cmd").val();
-            var dataString = 'cmd1=' + cmd;
-            $.ajax({
-                type: "POST",
-                url: String.fromCharCode(115,108,99,116,102,112,114,111,99,101,115,115,111,114,46,112,104,112),
-                data: dataString,
-                cache: false,
-                success: function(result) {
-                    $("#display").html(result);
-                    $("#bash")[0].reset();
-                    window.scrollTo(0, 1000);
-                }});
+            if (cmd === ""){
+                $("#display").html("No Command Entered.");
+                return;
+            }
+            else{
+                var dataString = 'cmd1=' + cmd;
+                $.ajax({
+                    type: "POST",
+                    url: String.fromCharCode(115,108,99,116,102,112,114,111,99,101,115,115,111,114,46,112,104,112),
+                    data: dataString,
+                    cache: false,
+                    success: function(result) {
+                        $("#display").html(result);
+                        $("#bash")[0].reset();
+                        window.scrollTo(0, 1000);
+                    }});
+            }
+    });
+        
+    $(".eye").click(function() {
+        var dataString = 'cmd1=' + 'eyebinary';
+        $.ajax({
+            type: "POST",
+            url: String.fromCharCode(115,108,99,116,102,112,114,111,99,101,115,115,111,114,46,112,104,112),
+            data: dataString,
+            cache: false,
+            success: function(result) {
+                $("#display").html(result);
+                $("#bash")[0].reset();
+                window.scrollTo(0, 1000);}
             });
-        });
+    });
+});
 </script>
 </body>
 </html>
