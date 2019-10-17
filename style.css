@@ -224,6 +224,10 @@ textarea, input {
     font-weight:normal;
 }
 
+.check{color:#ff0000;
+    font-weight:normal;
+}
+
 .lock {
    color:#00b600;
    -webkit-animation: lock-glow 1s ease-in-out infinite alternate;
