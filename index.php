@@ -1,6 +1,7 @@
+<?php ob_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
-    <!--Here is a freebie slctf[xxxxxx]-->
+    <!--Here is a freebie slctf[WVZkRk]-->
 <head>
 <meta charset="UTF-8">
 <meta name="robots" content="noindex, nofollow, noarchive" />
@@ -14,14 +15,13 @@ crossorigin="anonymous">
 </script>
     
   </head>
-<body onclick="document.forms[0].cmd.focus()">
-
+<body>
 <div class="scanlines"></div>
 <div class="scanline"></div>
 <div class="flicker"></div>
 <div class="body">
-    <pre class='skull'>
-        <span style="lg display:block;">
+    <pre class='skull' onclick="document.forms[0].cmd.focus()">
+        <span class="lg" style="display:block;">
                          .;c:,;;;;;;;;,;;;;;,;,,.
                       .....,lkxloooloooolooooolol:,.....
                      ..:l:::loolooololodldoooolooooolll..
@@ -94,34 +94,21 @@ crossorigin="anonymous">
             $cookie_value .= "-$idseed";
             
             if(!isset($_COOKIE[$cookie_name])) {
-                echo "Welcome. Please type a command. Try using \$help";
+                echo "Welcome. Please type a command. Try using ~\$help";
                 setcookie($cookie_name, $cookie_value, time() + (86400 * 7), "/");
             } else {
-                echo "Welcome Back. Please Type a command. Try using \$help";
+                echo "Welcome Back. Please Type a command. Try using ~\$help";
                 
             }
         ?>
+      <div class="w">
+          <form id="bash">
+          ~$<input id="cmd" class="w" type="text" autocomplete="off" size="50" maxlength="50"/>
+          <input id="submit" type="submit" style="display: none;"/></form>
+      </div>
     </div>
     <div class="w">
-        <form id="bash">
-        ~$<input id="cmd" class="w" type="text" autocomplete="off" size="50" maxlength="50"/>
-        <input id="submit" type="submit" style="display: none;"/></form>
-        <div id="display"></div>
-        <div id="lastout">
-        <?php
-            /*
-            $lastOut = array("");
-            
-            foreach($lastOut as $history) {
-                echo $history;
-                echo "<br>";
-            }
-            
-            array_push($lastOut, $lastCmd);
-            array_push($lastOut, $out);
-            */
-        ?>
-        </div>
+    <div id="display"></div>
     </div>
     </br></br>
 </div>
@@ -150,7 +137,7 @@ $(document).ready(function() {
     });
         
     $(".eye").click(function() {
-        var dataString = 'cmd1=' + 'eyebinary';
+        var dataString = 'cmd1=' + String.fromCharCode(101,121,101,98,105,110,97,114,121);
         $.ajax({
             type: "POST",
             url: String.fromCharCode(115,108,99,116,102,112,114,111,99,101,115,115,111,114,46,112,104,112),
@@ -162,7 +149,9 @@ $(document).ready(function() {
                 window.scrollTo(0, 1000);}
             });
     });
+  
 });
+
 </script>
 </body>
 </html>

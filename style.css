@@ -228,8 +228,7 @@ textarea, input {
     font-weight:normal;
 }
 
-.lock {
-   color:#00b600;
+.lock-glow {
    -webkit-animation: lock-glow 1s ease-in-out infinite alternate;
    -moz-animation: lock-glow 1s ease-in-out infinite alternate;
    animation: lock-glow 1s ease-in-out infinite alternate;
@@ -237,10 +236,10 @@ textarea, input {
 
 @-webkit-keyframes lock-glow {
   from {
-    text-shadow: 0 0 5px #111, 0 0 10px #009600, 0 0 20px #009600;
+    text-shadow: 0 0 5px #111, 0 0 10px #02d102, 0 0 20px #02d102;
   }
   to {
-    text-shadow: 0 0 5px #111, 0 0 10px #02d102, 0 0 20px #02d102;
+    text-shadow: 0 0 5px #111, 0 0 10px #009600, 0 0 20px #009600;
   }
 }
 
