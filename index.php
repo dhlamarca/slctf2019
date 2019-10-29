@@ -154,7 +154,7 @@ $(document).ready(function() {
               $("#display").append(result);
               $("#bash")[0].reset();
               bash.scrollIntoView(true);
-            });
+        }});
     });
   
 });
