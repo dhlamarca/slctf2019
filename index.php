@@ -20,7 +20,7 @@ crossorigin="anonymous">
 <div class="scanline"></div>
 <div class="flicker"></div>
 <div class="body">
-    <pre class='skull' onclick="document.forms[0].cmd.focus()">
+    <pre class='skull'>
         <span class="lg" style="display:block;">
                          .;c:,;;;;;;;;,;;;;;,;,,.
                       .....,lkxloooloooolooooolol:,.....
@@ -101,25 +101,32 @@ crossorigin="anonymous">
                 
             }
         ?>
+    </div>
+    <div class="w" id="display"></div>
+    <div class="clickfocus" onclick="document.forms[0].cmd.focus()">
       <div class="w">
           <form id="bash">
-          ~$<input id="cmd" class="w" type="text" autocomplete="off" size="50" maxlength="50"/>
+          ~$<input id="cmd" class="w" type="text" autocomplete="off" size="50" maxlength="50" autofocus/>
           <input id="submit" type="submit" style="display: none;"/></form>
       </div>
-    </div>
-    <div class="w">
-    <div id="display"></div>
     </div>
     </br></br>
 </div>
 <script>
+var bash = document.getElementById("bash");
 $(document).ready(function() {
     $("#bash").submit(function(event){
         event.preventDefault();
             var cmd = $("#cmd").val();
-            if (cmd === ""){
-                $("#display").html("No Command Entered.");
+            if (cmd == ""){
+                $("#display").append("No Command Entered.</br>");
+                bash.scrollIntoView(true);
                 return;
+            }
+            else if (cmd == "clear" || cmd == "reset") {
+              $("#display").html("console cleared</br>");
+              $("#bash")[0].reset();
+              return;
             }
             else{
                 var dataString = 'cmd1=' + cmd;
@@ -129,9 +136,9 @@ $(document).ready(function() {
                     data: dataString,
                     cache: false,
                     success: function(result) {
-                        $("#display").html(result);
-                        $("#bash")[0].reset();
-                        window.scrollTo(0, 1000);
+                      $("#display").append(result);
+                      $("#bash")[0].reset();
+                      bash.scrollIntoView(true);
                     }});
             }
     });
@@ -144,9 +151,9 @@ $(document).ready(function() {
             data: dataString,
             cache: false,
             success: function(result) {
-                $("#display").html(result);
-                $("#bash")[0].reset();
-                window.scrollTo(0, 1000);}
+              $("#display").append(result);
+              $("#bash")[0].reset();
+              bash.scrollIntoView(true);
             });
     });
   
