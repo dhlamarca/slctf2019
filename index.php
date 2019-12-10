@@ -9,9 +9,7 @@
 
 <link rel="stylesheet" type="text/css" href="style.css">
 
-<script  src="https://code.jquery.com/jquery-3.4.1.min.js"
-integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
-crossorigin="anonymous">
+<script  src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js">
 </script>
     
   </head>
@@ -102,12 +100,18 @@ crossorigin="anonymous">
             }
         ?>
     </div>
+    <div class="w" id="display"><p>The offical CTF challenge has concluded.</br>
+          This challenge page will stay online for those who want to explore it further.</br>
+      If you have any questions about completing challenges or about how this page was made please feel free to reach out to Devin LaMarca in Research.
+    </p></div>
+          </br></br>
     <div class="w" id="display"></div>
-    <div class="clickfocus" onclick="document.forms[0].cmd.focus()">
+
+    <div class="clickfocus">
       <div class="w">
           <form id="bash">
           ~$<input id="cmd" class="w" type="text" autocomplete="off" size="50" maxlength="50" autofocus/>
-          <input id="submit" type="submit" style="display: none;"/></form>
+          <input id="submit" type="submit" style="display: none;"/></form>  
       </div>
     </div>
     </br></br>
@@ -142,7 +146,7 @@ $(document).ready(function() {
                     }});
             }
     });
-        
+
     $(".eye").click(function() {
         var dataString = 'cmd1=' + String.fromCharCode(101,121,101,98,105,110,97,114,121);
         $.ajax({
@@ -159,6 +163,15 @@ $(document).ready(function() {
   
 });
 
+document.addEventListener('mouseup', function(){
+  var selecttext = window.getSelection().toString();
+    if (selecttext == "") {
+      document.forms[0].cmd.focus();
+    }
+    else if (selecttext !== "") {
+      //do nothing
+    }
+});
 </script>
 </body>
 </html>

@@ -96,11 +96,11 @@ switch ($cmd) {
 
         ----------------------------------<br>
         TOOLS: The following are tools that might be handy.</br>
-        <a class=\"w\" href=\"https://morsecode.scphillips.com/translator.html\">Morse Code Translator</a></br>
-        <a class=\"w\" href=\"https://www.base64decode.net/\">Base64 decoder</a></br>
-        <a class=\"w\" href=\"https://lingojam.com/BinaryEncoder&Decoder\">Binary decoder</a></br>
-        <a class=\"w\" href=\"https://www.asciitohex.com/\">Multi decoder</a></br>
-        <a class=\"w\" href=\"https://gchq.github.io/CyberChef/\">Cyber Chef</a></br></br>";
+        <a class=\"w\" target=\"_blank\" href=\"https://morsecode.scphillips.com/translator.html\">Morse Code Translator</a></br>
+        <a class=\"w\" target=\"_blank\" href=\"https://www.base64decode.net/\">Base64 decoder</a></br>
+        <a class=\"w\" target=\"_blank\" href=\"https://lingojam.com/BinaryEncoder&Decoder\">Binary decoder</a></br>
+        <a class=\"w\" target=\"_blank\" href=\"https://www.asciitohex.com/\">Multi decoder</a></br>
+        <a class=\"w\" target=\"_blank\" href=\"https://gchq.github.io/CyberChef/\">Cyber Chef</a></br></br>";
         break;
 
 //Tier 1
@@ -269,7 +269,7 @@ switch ($cmd) {
     case startsWith($cmd, "cd"):
         echo "~\$$cmd</br>";
 
-        echo "You're stuck here. Finde another way.</br>";
+        echo "You're stuck here. Find another way.</br>";
         break;
 
     case "research":
